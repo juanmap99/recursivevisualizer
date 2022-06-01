@@ -10,7 +10,7 @@
             <h1>Solución sin programación dinámica</h1>
             <p></p>
             <div class="img-container">
-                <img src="../../../../assets/foto_sols/comb_nodp.png" alt="Código solución" width="90%" height="200">
+                <img src="assets/foto_sols/comb_nodp.png" alt="Código solución" width="90%" height="200">
             </div>
             <br/><br/>
             <h1>Explicación código</h1>
@@ -23,7 +23,7 @@
                         cuando es enviada recursivamente, que llegue a 0 implica que encontramos una secuencia de números 
                         que al sumarlos nos dan target. Debido a que ese es el caso, retornamos 1 implicando que 
                         encontramos una nueva solución única.</li>
-                        <li><strong>Caso target < 0:</strong> Por los mismos motivos explicados, en el caso que target 
+                        <li><strong>Caso target 0:</strong> Por los mismos motivos explicados, en el caso que target 
                         valga menor a 0 implica que "nos pasamos" con la suma, y debido a que el array no cuenta con números 
                         negativos, retornamos 0 ya que por este camino no tendremos solución. </li>
                     </ul>
@@ -49,7 +49,7 @@
                 la manera a través de la cual se llama recursivamente la función
             </p>
             <div class="img-container">
-                <img src="../../../../assets/arbol_llamadas/comb_call_nodp.png" alt="Árbol llamadas" width="90%" height="300">
+                <img src="assets/arbol_llamadas/comb_call_nodp.png" alt="Árbol llamadas" width="90%" height="300">
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
             <h1>Solución con programación dinámica</h1>
             <p></p>
             <div class="img-container">
-                <img src="../../../../assets/foto_sols/comb_dp.png" alt="Código solución" width="90%" height="350">
+                <img src="assets/foto_sols/comb_dp.png" alt="Código solución" width="90%" height="350">
             </div>
             <br/><br/>
             <h1>Explicación código</h1>
@@ -73,7 +73,7 @@
                         <ul>
                             <li><strong>Caso target en memo:</strong> Implica la target enviada por parametro ya fue
                                 calculada con anterioridad y conocemos su resultado.</li>
-                            <li><strong>Caso target < 0:</strong> Por los motivos explicados anteriormente, en el caso que target 
+                            <li><strong>Caso target 0:</strong> Por los motivos explicados anteriormente, en el caso que target 
                             valga menor a 0 implica que "nos pasamos" con la suma, y debido a que el array no cuenta con números 
                             negativos, retornamos 0 ya que por este camino no tendremos solución. </li>
                         </ul>
@@ -101,7 +101,7 @@
             </p>
             <p>El árbol que se generará en este caso será el siguiente:</p>
             <div class="img-container">
-                <img src="../../../../assets/arbol_llamadas/comb_call_dp.png" alt="Árbol llamadas" width="90%" height="300">
+                <img src="assets/arbol_llamadas/comb_call_dp.png" alt="Árbol llamadas" width="90%" height="300">
             </div>
         </div>
     </div>
