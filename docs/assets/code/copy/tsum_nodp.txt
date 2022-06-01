@@ -1,0 +1,16 @@
+def totalTargetSumHelper(nums,target,index,curr_sum):
+    if index < 0 and curr_sum == target:
+        return 1
+    if index < 0:
+        return 0
+    
+    solsSumando = totalTargetSumHelper(nums,target,index-1,
+                                    curr_sum + nums[index])
+    solsRestando = totalTargetSumHelper(nums,target,index-1,
+                                    curr_sum + -nums[index])
+    totalSol = solsSumando + solsRestando
+
+    return totalSol
+
+def totalTargetSum(nums,target):
+    return totalTargetSumHelper(nums,target,len(nums)-1,0)

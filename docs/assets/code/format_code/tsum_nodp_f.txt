@@ -1,0 +1,18 @@
+$sdef$s $dtotalTargetSumHelper$d(nums,target,index,curr_sum):
+    $sif$s index < $u0$u $sand$s curr_sum == target:
+        $sreturn$s $u1$u
+    $sif$s index < $u0$u:
+        $sreturn$s $u0$u
+    
+    solsSumando = totalTargetSumHelper(nums,target,index-$u1$u,
+                                    curr_sum + nums[index])
+    solsRestando = totalTargetSumHelper(nums,target,index-$u1$u,
+                                    curr_sum + -nums[index])
+    totalSol = solsSumando + solsRestando
+
+    $sreturn$s totalSol
+
+$d$d
+
+$sdef$s $dtotalTargetSum$d(nums,target):
+    $sreturn$s totalTargetSumHelper(nums,target,$flen$f(nums)-$u1$u,$u0$u)

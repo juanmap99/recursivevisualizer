@@ -1,0 +1,5 @@
+def fib(curNum):
+    if(curNum == 0 or curNum == 1):
+        return curNum
+    return fib(curNum-1) + fib(curNum-2)
+    
