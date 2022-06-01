@@ -1,0 +1,109 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución sin programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/robber_nodp.png" alt="Código solución" width="90%" height="200">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+            <ul>
+                <li>
+                    La restricción de corte se establece cuando <strong>index</strong> es menor a 0
+                    ya que implica que no quedan mas casas en la cuadra por recorrer.
+                </li>
+                <li>
+                    En caso paso tenemos dos opciones, o robamos la casa o no la robamos. En el caso que la robemos
+                    el máximo profit a sacar es igual a la suma del dinero de la casa mas la suma del máximo profit 
+                    conseguible salteando la casa siguiente. En caso de no robar la casa, el maximo profit es el máximo
+                    conseguible no tomando el dinero de la casa actual y basandose en el maximo profit que se obtiene 
+                    a partir de la casa que le sigue.
+                </li>
+                <li>Una vez que tenemos los profits conseguibles entre las dos opciones; robar y no robar; tomamos 
+                    el mayor en función de maximizar el dinero robado.
+                </li>
+                <li>El index se inicializa de manera tal que apunte al último elemento del array.</li>
+            </ul>
+            <br/><br/>
+            <h1>Problema de la solución</h1>
+            <p>
+            <p>El problema de la solución es que debido a que no utiliza programación dinámica esta recalculando
+               el maximo profit dado un index una y otra vez, lo que se torna inviable a nivel temporal a medida que 
+               incrementa el tamaño del array.
+            </p>
+            <p>Esta problemática puede ser facilmente visualizada si graficamos un árbol que represente 
+                la manera a través de la cual se llama recursivamente la función tomando como base un ejemplo.
+            </p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/robber_nodp.png" alt="Árbol llamadas" width="96%" height="350">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modall-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución con programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/robber_dp.png" alt="Código solución" width="90%" height="310">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+                <ul>
+                    <li>
+                        La restricción de corte se establece cuando <strong>index</strong> es menor a 0
+                        ya que implica que no quedan mas casas en la cuadra por recorrer, o cuando estamos
+                        evaluando un index que ya se encuentra calculado en el memo.
+                    </li>
+                    <li>
+                        En caso paso tenemos dos opciones, o robamos la casa o no la robamos. En el caso que la robemos
+                        el maximo profit a sacar es igual a la suma del dinero de la casa mas la suma del máximo profit 
+                        conseguible salteando la casa siguiente. En caso de no robar la casa, el maximo profit es el máximo
+                        conseguible no tomando el dinero de la casa actual y basandose en el maximo profit que se obtiene 
+                        a partir de la casa que le sigue.
+                    </li>
+                    <li>Una vez que tenemos los profits conseguibles entre las dos opciones; robar y no robar; tomamos 
+                        el mayor en función de maximizar el dinero robado y lo guardamos en el memo para no tener que 
+                        recalcularlo.
+                    </li>
+                    <li>El index se inicializa de manera tal que apunte al último elemento del array.</li>
+                    <li>El memo se inicializa con una longitud igual al de los elementos en el array con 
+                        todos sus valores en -1 indicando que dicho index todavía no fue calculado.
+                    </li>
+                </ul>
+            <br/><br/>
+            <h1>Caso utilización DP</h1>
+            <p>
+            <p>Debido a que en este caso aplicamos una solución top-down en donde aplicamos memorización, solucionamos la problemática presentada en el caso en donde
+                no se utilizó programación dinámica(DP) ya que al guardar el resultado del máximo profit dado un index
+                ya no tenemos que realizar recalculos.
+            </p>
+            <p>El árbol que se generará en este caso será el siguiente:</p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/robber_dp.png" alt="Árbol llamadas" width="90%" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

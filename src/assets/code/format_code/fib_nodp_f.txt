@@ -1,0 +1,5 @@
+$sdef$s $dfib$d(curNum):
+    $sif$s(curNum == $u0$u $sor$s curNum == $u1$u):
+        $sreturn$s curNum
+    $sreturn$s fib(curNum-$u1$u) + fib(curNum-$u2$u)
+    

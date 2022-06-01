@@ -1,0 +1,12 @@
+$sdef$s $duniquePathsHelper$d(r,c):
+    $sif$s(r < $u0$u $sor$s c < $u0$u):$sreturn$s $u0$u
+    $selif$s(r == $u0$u $sor$s c==$u0$u):$sreturn$s $u1$u
+    totalPaths = uniquePathsHelper(r-$u1$u,c)+\
+                 uniquePathsHelper(r,c-$u1$u)
+    $sreturn$s totalPaths
+
+$d $d
+
+$sdef$s $duniquePaths$d(r,c):
+    $sreturn$s uniquePathsHelper(r-$u1$u,c-$u1$u)
+    

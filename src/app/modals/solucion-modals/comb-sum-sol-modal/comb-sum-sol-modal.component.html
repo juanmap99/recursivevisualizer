@@ -1,0 +1,119 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución sin programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/comb_nodp.png" alt="Código solución" width="90%" height="200">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+            <ul>
+                <li>
+                    La restricción de corte se establece cuando <strong>target</strong> es 0 o menor a 0.
+                    <ul>
+                        <li><strong>Caso target == 0:</strong> Debido a que la target se ve restada por un elemento del array 
+                        cuando es enviada recursivamente, que llegue a 0 implica que encontramos una secuencia de números 
+                        que al sumarlos nos dan target. Debido a que ese es el caso, retornamos 1 implicando que 
+                        encontramos una nueva solución única.</li>
+                        <li><strong>Caso target < 0:</strong> Por los mismos motivos explicados, en el caso que target 
+                        valga menor a 0 implica que "nos pasamos" con la suma, y debido a que el array no cuenta con números 
+                        negativos, retornamos 0 ya que por este camino no tendremos solución. </li>
+                    </ul>
+                </li>
+                <li>
+                    Para calcular el número total de soluciones sobre cada llamada recursiva inicializaremos una variable
+                    llamada <strong>totalSol</strong>.
+                </li>
+                <li>
+                    Luego inicializaremos un ciclo <strong>for</strong> en donde sumaremos a <strong>totalSol</strong>
+                    la cantidad de soluciones únicas que podemos conseguir si incluimos en la suma a target el número actual 
+                    siendo evaluado en el for. Esto va a poder verse con mas claridad en el gráfico de árbol de llamadas.
+                </li>
+            </ul>
+            <br/><br/>
+            <h1>Problema de la solución</h1>
+            <p>
+            <p>El problema de la solución es que debido a que no utiliza programación dinámica esta recalculando
+                la cantidad de combinaciones para una target ya calculada una y otra vez, lo que se torna temporalmente inviable a medida que incrementa
+                el tamaño del array.
+            </p>
+            <p>Esta problemática puede ser facilmente visualizada si graficamos un árbol que represente 
+                la manera a través de la cual se llama recursivamente la función
+            </p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/comb_call_nodp.png" alt="Árbol llamadas" width="90%" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modall-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución con programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/comb_dp.png" alt="Código solución" width="90%" height="350">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+                <ul>
+                    <li>
+                        La restricción de corte se establece cuando <strong>target</strong> se encuentra
+                        en el memo o es menor a 0.
+                        <ul>
+                            <li><strong>Caso target en memo:</strong> Implica la target enviada por parametro ya fue
+                                calculada con anterioridad y conocemos su resultado.</li>
+                            <li><strong>Caso target < 0:</strong> Por los motivos explicados anteriormente, en el caso que target 
+                            valga menor a 0 implica que "nos pasamos" con la suma, y debido a que el array no cuenta con números 
+                            negativos, retornamos 0 ya que por este camino no tendremos solución. </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Para calcular el número total de soluciones sobre cada llamada recursiva inicializaremos una variable
+                        llamada <strong>totalSol</strong>.
+                    </li>
+                    <li>
+                        Luego inicializaremos un ciclo <strong>for</strong> en donde sumaremos a <strong>totalSol</strong>
+                        la cantidad de soluciones únicas que podemos conseguir si incluimos en la suma a target el número actual 
+                        siendo evaluado en el <strong>for</strong>. Esto va a poder verse con mas claridad en el gráfico de árbol de llamadas.
+                    </li>
+                    <li>Cuando calculamos el total de combinaciones para un target, guardamos dicho valor en el memo 
+                        para no tener que recalcularlo nuevamente.
+                    </li>
+                </ul>
+            <br/><br/>
+            <h1>Caso utilización DP</h1>
+            <p>
+            <p>Debido a que en este caso aplicamos una solución top-down(debido a que empezamos desde el target solcitado
+                y lo fuimos restando hacia 0) en donde aplicamos memorización, solucionamos la problemática presentada en el caso en donde
+                no se utilizó programación dinámica(DP) ya que al guardar el resultado de los target calculados
+                ya no tenemos que recalcular los mismos.
+            </p>
+            <p>El árbol que se generará en este caso será el siguiente:</p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/comb_call_dp.png" alt="Árbol llamadas" width="90%" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

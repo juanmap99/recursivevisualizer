@@ -1,0 +1,56 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción problema</h1>
+            <p>Se requiere diseñar un programa para realizar el cálculo del Fibonacci
+                de un número.
+            </p>
+            <p>El Fibonacci de un número X esta dado por la siguiente ecuación.</p>
+            <ul>
+                <li>Fibonacci(x) = Fibonacci(x-1) + Fibonacci(x-2)</li>
+            </ul>
+            <p>Considerar a 0 y 1 como números base, en donde el Fibonacci de los mismos es 0
+                y 1 respectivamente, es decir, el mismo número.
+            </p>
+            <p></p>
+            <h1>Ejemplos</h1>
+            <ul>
+                <li>Fib(2) = Fib(1) + Fib(0) = 1 + 0 = 1</li>
+                <li>Fib(4) = Fib(3) + Fib(2) = Fib(2) + Fib(1) + Fib(2) = 1 + 1 + 1 = 3</li>
+            </ul>
+            <p></p>
+            <h1>Restricciones</h1>
+            <p>Las restricciones que se le impondrán a la solución son las siguientes:</p>
+            <ul>
+                <li>Usar una estrategia de resolución TOP-DOWN. Eso implica que se realizará el cálculo
+                    empezando desde el número target y desplazandose hacia 0 y no al revez.
+                </li>
+                <li>Resolver el problema utilizando recursividad.</li>
+                <li>Realizar dos soluciones, una que no utilice programación dinámica, y otra que si.</li>
+            </ul>
+            <p></p>
+            <h1>Follow-up</h1>
+            <p>Se presentan los siguientes desafios como follow-up al problema:</p>
+            <ul>
+                <li>Analice como se ve afectada la complejidad temporal del algoritmo al pasar de una solución que 
+                    no utiliza programación dinámica hacia una que si.</li>
+                <li>Dibuje un árbol que represente las llamadas recursivas que se realizarán en el cálculo
+                    del Fibonacci(5) tanto para el caso en donde no se utiliza programación dinámica como para 
+                    el caso en el que si.
+                </li>
+                <li>Corra el código a través de la herramienta bajo el modo de funcionamiento que considere conveniente y 
+                    analice y compare el output de respuesta con sus predicciones.
+                </li>
+            </ul>
+            <p></p>
+            <p><strong>ACLARACIÓN:</strong>En caso de precisar una explicación detallada, presione sobre el boton correspondiente</p>
+        </div>
+    </div>
+
+</div>

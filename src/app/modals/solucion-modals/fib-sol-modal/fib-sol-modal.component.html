@@ -1,0 +1,99 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución sin programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/fib_nodp2.png" alt="Código solución" width="90%" height="200">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+            <ul>
+                <li>
+                    La restricción de corte se establece cuando <strong>curNum</strong> es 0 o 1 ya 
+                    que son los dos valores base que conocemos, siendo <strong>Fib(0)=0</strong> y <strong>Fib(1)=1</strong>.
+                </li>
+                <li>
+                    En caso que <strong>curNum</strong> no sea el caso base conocido, el <strong>Fib(curNum)</strong>
+                    sera igual a <strong>Fib(curNum-1)+Fib(curNum-2)</strong>.
+                </li>
+            </ul>
+            <br/><br/>
+            <h1>Problema de la solución</h1>
+            <p>
+            <p>El problema de la solución es que debido a que no utiliza programación dinámica esta recalculando
+                los mismos valores una y otra vez, lo que se torna temporalmente inviable a medida que incrementa
+                el número sobre el cual deseamos conocer el Fibonacci.
+            </p>
+            <p>Esta problemática puede ser facilmente visualizada si graficamos un árbol que represente 
+                la manera a través de la cual se llama recursivamente la función, el cual sera un árbol binario
+                ya que cada llamada a la función tiene como potencial máximo la generación de dos nuevos nodos,
+                uno para <strong>Fib(curNum-1)</strong> y otro para <strong>Fib(curNum-2)</strong>
+            </p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/fib_call_nodp.png" alt="Árbol llamadas" width="90%" height="200">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modall-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución con programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/fib_dp2.png" alt="Código solución" width="90%" height="350">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+            <ul>
+                <li>
+                    La restricción de corte se establece cuando <strong>curNum</strong> se encuentra en el memo,
+                    el cual se encontrará en primera medida instanciado con el Fibonacci de 0 y 1 que son los
+                    dos valores que conocemos.
+                </li>
+                <li>
+                    En caso que <strong>curNum</strong> se encuentre en el memo su valor en el diccionario será
+                    distinto a -1, ya que el mismo es el valor indicativo para señalar la ausencia de la key 
+                    en el diccionario que fue definido al inicializar el <strong>defaultdict</strong>. 
+                </li>
+                <li>
+                    Cuando calculamos el Fibonacci de un número lo guardamos en nuestro memo, lo que generará
+                    que no tengamos que recalcular valores previamente calculados. 
+                </li>
+            </ul>
+            <br/><br/>
+            <h1>Caso utilización DP</h1>
+            <p>
+            <p>Debido a que en este caso aplicamos una solución top-down(debido a que empezamos desde el Fibonacci del
+                target) en donde aplicamos memorización, solucionamos la problemática presentada en el caso en donde
+                no se utilizó programación dinámica(DP) ya que al guardar el resultado de los Fibonacci calculados
+                ya no tenemos que recalcular los mismos.
+            </p>
+            <p>El árbol que se generará en este caso será el siguiente:</p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/fib_call_dp.png" alt="Árbol llamadas" width="90%" height="200">
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

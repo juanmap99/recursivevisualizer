@@ -1,0 +1,10 @@
+def uniquePathsHelper(r,c):
+    if(r < 0 or c < 0):return 0
+    elif(r == 0 or c==0):return 1
+    totalPaths = uniquePathsHelper(r-1,c)+\
+                 uniquePathsHelper(r,c-1)
+    return totalPaths
+
+def uniquePaths(r,c):
+    return uniquePathsHelper(r-1,c-1)
+    

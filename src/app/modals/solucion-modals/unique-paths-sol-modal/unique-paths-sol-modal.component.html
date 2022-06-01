@@ -1,0 +1,122 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución sin programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/uPaths_nodp.png" alt="Código solución" width="90%" height="200">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+                <ul>
+                    <li><strong>Aclaración:</strong>En el algoritmo en vez de avanzar desde la posición del robot hasta la meta 
+                    se retrocede desde la meta hasta la posición del robot. Esto se hace para evitar tener que enviar dos parámetros 
+                    extras referente a la longitud de la grid.</li>
+                    <li>
+                        Existen dos restricciones de corte:
+                        <ul>
+                            <li>Estamos en una fila o columna menor a 0: Escapamos de los límites definidos por la matriz y por ende
+                                debemos retornar 0
+                            </li>
+                            <li>La fila o la columna son 0: Devolvemos 1 ya que una vez que la fila o la columna son 0
+                                solo existe una solución única, o avanzar hacia la izquierda hasta llegar al borde superior izquierdo 
+                                en el caso que la fila sea cero, o subir derecho hasta el borde superior izquierdo cuando la columna
+                                es cero.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        En caso que no estememos en el caso de restricción de corte, la cantidad de caminos únicos en la 
+                        posición actual esta dado por la suma de caminos entre disminuir una fila y mantener la columna intacta 
+                        y mantener la fila intacta pero disminuir una columna 
+                    </li>
+                </ul>
+            <br/><br/>
+            <h1>Problema de la solución</h1>
+            <p>
+            <p>El problema de la solución es que debido a que no utiliza programación dinámica esta recalculando
+                los caminos que llevan a [0][0] una y otra vez ante matrices de tamaño [r][c] ya calculadas, lo que lo
+                torna inviable a nivel temporal a medida que incrementa la dimensión de la matriz.
+            </p>
+            <p>Esta problemática puede ser facilmente visualizada si graficamos un árbol que represente 
+                la manera a través de la cual se llama recursivamente la función dado un ejemplo:
+            </p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/uPaths_call_nodp.png" alt="Árbol llamadas" width="90%" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modall-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución con programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/uPaths_dp.png" alt="Código solución" width="90%" height="350">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+            <ul>
+                <li><strong>Aclaración:</strong>En el algoritmo en vez de avanzar desde la posición del robot hasta la meta 
+                se retrocede desde la meta hasta la posición del robot. Esto se hace para evitar tener que enviar dos parámetros 
+                extras referente a la longitud de la grid.</li>
+                <li>
+                    Existen tres restricciones de corte:
+                    <ul>
+                        <li>Estamos en una fila o columna menor a 0: Escapamos de los límites definidos por la matriz y por ende
+                                debemos retornar 0
+                        </li>
+                        <li>La fila o la columna son 0: Devolvemos 1 ya que una vez que la fila o la columna son 0
+                            solo existe una solución única, o avanzar hacia la izquierda hasta llegar al borde superior izquierdo 
+                            en el caso que la fila sea 0, o subir derecho hasta el borde superior izquierdo cuando la columna
+                            es cero.
+                        </li>
+                        <li>La cantidad de caminos únicos hacia [0][0] ya fue calculado para una matriz de 
+                            tamaño [r][c] y se encuentra en el memo
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    En caso que no estememos en el caso de restricción de corte, la cantidad de caminos únicos en la 
+                    posición actual esta dado por la suma de caminos entre disminuir una fila y mantener la columna intacta 
+                    y mantener la fila intacta pero disminuir una columna 
+                </li>
+                <li>
+                    Registrar en el memo la cantidad de caminos únicos para el [r][c] actual.
+                </li>
+            </ul>
+            <br/><br/>
+            <h1>Caso utilización DP</h1>
+            <p>
+            <p>Debido a que en este caso aplicamos una solución top-down en donde aplicamos memorización, solucionamos la problemática presentada en el caso en donde
+                no se utilizó programación dinámica(DP) ya que al guardar el resultado de los caminos 
+                únicos sobre matrices de dimensión [r][c] ya calculadas nos evitamos tener que realizar el recálculo.
+            </p>
+            <p>El árbol que se generará en este caso será el siguiente:</p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/uPaths_call_dp.png" alt="Árbol llamadas" width="90%" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+from collections import defaultdict
+
+def totalCombinationSumHelper(nums, target):
+    if(target < 0): 
+        return 0
+    if(memo[target] != -1):
+        return memo[target]
+    totalSol = 0
+    for num in nums:
+        totalSol += totalCombinationSumHelper(nums,target-num, memo)
+    memo[target] = totalSol
+    return memo[target]
+
+def totalCombinationSum(nums,target):
+    memo = defaultdict(lambda : -1)
+    memo[0] = 1
+    return totalCombinationSumHelper(nums,target,memo)

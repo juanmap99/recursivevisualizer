@@ -1,0 +1,101 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución sin programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/tSum_nodp.png" alt="Código solución" width="90%" height="350">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+            <ul>
+                <li>
+                    La restricción de corte se establece cuando terminamos de recorrer el array, es decir
+                    el <strong>index</strong> es menor a 0. En ese caso, si el target es igual a 0 implica que 
+                    encontramos una ecuación utilizando los elementos del array que nos lleva a target y debemos 
+                    retornar 1.
+                </li>
+                <li>
+                    En caso de que nuestro index no sea 0 debemos probar la cantidad de soluciones que podemos generar
+                    que llevan a target, en donde dicha cantidad estará representada por la suma de las soluciones que podemos generar 
+                    agregando el índice actual a la ecuación como una suma y la cantidad de soluciones que podemos 
+                    generar agregando el índice actual a la ecuación como una resta.
+                </li>
+                <li>Inicialmente se llama a la función de manera tal que índex apunte al último elemento del array y curr_sum sea 0. </li>
+            </ul>
+            <br/><br/>
+            <h1>Problema de la solución</h1>
+            <p>
+            <p>El problema de la solución es que debido a que no utiliza programación dinámica esta recalculando
+                los mismos valores una y otra vez sobre <strong>curr_sum</strong> ya calculadas en el índice actual, lo que se torna temporalmente inviable a medida que incrementa
+                el tamaño del array.
+            </p>
+            <p>Esta problemática puede ser facilmente visualizada si graficamos un árbol que represente 
+                la manera a través de la cual se llama recursivamente la función.
+            </p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/tSum_call_nodp.png" alt="Árbol llamadas" width="96%" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modall-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+            <h1>Solución con programación dinámica</h1>
+            <p></p>
+            <div class="img-container">
+                <img src="../../../../assets/foto_sols/tSum_dp.png" alt="Código solución" width="90%" height="380">
+            </div>
+            <br/><br/>
+            <h1>Explicación código</h1>
+            <p>
+                <ul>
+                    <li>
+                        La restricción de corte se establece cuando terminamos de recorrer el array, es decir
+                        el <strong>index</strong> es menor a 0, o cuando la <strong>curr_sum</strong> ya haya sido 
+                        calculada sobre el índice actual y se encuentre por ende presente en el memo.
+                    </li>
+                    <li>
+                        En caso de que nuestro index no sea 0 debemos probar la cantidad de soluciones que podemos generar
+                        que llevan a target, en donde dicha cantidad estará representada por la suma de las soluciones que podemos generar 
+                        agregando el índice actual a la ecuación como una suma y la cantidad de soluciones que podemos 
+                        generar agregando el índice actual a la ecuación como una resta.
+                    </li>
+                    <li>Una vez calculada la suma total de soluciones para la <strong>curr_sum</strong> y <strong>index</strong>
+                    actual, se coloca en el memo para evitar el recálculo.</li>
+                    <li>Inicialmente se llama a la función de manera tal que index apunte al último elemento del array y curr_sum sea 0 </li>
+                </ul>
+            <br/><br/>
+            <h1>Caso utilización DP</h1>
+            <p>
+            <p>Debido a que en este caso aplicamos una solución top-down en donde aplicamos memorización, solucionamos la problemática presentada en el caso en donde
+                no se utilizó programación dinámica(DP) ya que al guardar el resultado de la curr_sum dado un index 
+                ya no tenemos que recalcular la cantidad de soluciones totales sobre caminos ya evaluados.
+            </p>
+            <p>El árbol que se generará en este caso será el siguiente:</p>
+            <div class="img-container">
+                <img src="../../../../assets/arbol_llamadas/tSum_call_dp.png" alt="Árbol llamadas" width="90%" height="280">
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

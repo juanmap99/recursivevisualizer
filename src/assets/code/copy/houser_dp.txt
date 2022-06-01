@@ -1,0 +1,15 @@
+def maxProfitRobberHelper(nums,index,memo):
+    if index < 0: 
+        return 0
+    if memo[index] != -1:
+        return memo[index]
+    robar = nums[index] + maxProfitRobberHelper(nums,index-2,memo)
+    no_robar = maxProfitRobberHelper(nums,index-1,memo)
+    maxProfit = max(robar,no_robar)
+    return maxProfit
+
+def maxProfitRobber(nums):
+    index = len(nums)-1
+    memo = [-1]*len(nums)
+    return maxProfitRobberHelper(nums,index,memo)
+    

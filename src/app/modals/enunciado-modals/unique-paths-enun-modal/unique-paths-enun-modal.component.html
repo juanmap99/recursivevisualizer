@@ -1,0 +1,92 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción problema</h1>
+            <p>
+                Se pide el diseño de un algoritmo para calcular la cantidad de caminos únicos a través 
+                de los cuales un robot puede mobilizarse desde el comienzo de la matiz hasta la esquina
+                inferior derecha de la misma, en donde sobre cada paso, el robot puede avanzar una posición
+                a la derecha o una posición hacia abajo pero no las dos al mismo tiempo.
+            </p>
+            <p>Se otorgaran dos parámetros:</p>
+            <ul>
+                <li><strong>Filas:</strong> Valor numérico que representa las filas que tendrá la matriz</li>
+                <li><strong>Columnas:</strong> Valor numérico que representa las columnas que tendrá la matriz</li>
+            </ul>
+            <h1>Visualización gráfica</h1>
+            <p>La posición en la que se encuentra el robot es la posición desde la cual arranca, la estrella determina hacia donde desea ir
+            </p>
+            <div class="img-container">
+                <img src="../../../../assets/camino_robot.png" alt="Código solución" width="75%" height="200">
+            </div>
+            <p></p>
+            <h1>Ejemplo</h1>
+            <ul>
+                <li>Parámetros
+                    <ul>
+                        <li>Filas: 3</li>
+                        <li>Columnas: 2</li>
+                    </ul>
+                </li>
+                <li>
+                    Respuesta: 3
+                </li>
+                <li>Caminos posibles
+                    <ul>
+                        <li>Camino 1 = matriz[0][0] -> matriz[1][0] -> matriz[2][0] -> matriz[2][1]</li>
+                        <li>Camino 2 = matriz[0][0] -> matriz[1][0] -> matriz[1][1] -> matriz[2][1]</li>
+                        <li>Camino 3 = matriz[0][0] -> matriz[0][1] -> matriz[1][1] -> matriz[2][1]</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2 style="padding-left: 10px;">Ejemplo B</h2>
+            <ul>
+                <li>Parámetros
+                    <ul>
+                        <li>Filas: 1</li>
+                        <li>Columnas: 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Respuesta: 1
+                </li>
+                <li>Caminos posibles
+                    <ul>
+                        <li>Camino 1 = matriz[0][0] -> matriz[0][1] -> matriz[0][2] -> matriz[0][3]</li>
+                    </ul>
+                </li>
+            </ul>
+            <p></p>
+            <h1>Restricciones</h1>
+            <p>Las restricciones que se le impondrán a la solución son las siguientes:</p>
+            <ul>
+                <li>Resolver el problema utilizando recursividad.</li>
+                <li>Realizar dos soluciones, una que no utilice programación dinámica, y otra que si.</li>
+            </ul>
+            <p></p>
+            <h1>Follow-up</h1>
+            <p>Se presentan los siguientes desafios como follow-up al problema:</p>
+            <ul>
+                <li>Analice como se ve afectada la complejidad temporal del algoritmo al pasar de una solución que 
+                    no utiliza programación dinámica hacia una que si.</li>
+                <li>Dibuje un árbol que represente las llamadas recursivas que se realizarán en el cálculo
+                    en donde r=3 y c=3 tanto para el caso en donde no se utiliza programación dinámica como para 
+                    el caso en el que si.
+                </li>
+                <li>Corra el código a través de la herramienta bajo el modo de funcionamiento que considere conveniente y 
+                    analice y compare el output de respuesta con sus predicciones.
+                </li>
+            </ul>
+            <p></p>
+            <p><strong>ACLARACIÓN:</strong>En caso de precisar una explicación detallada, presione sobre el boton correspondiente.</p>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,13 @@
+def uniquePathsHelper(r,c,memo):
+    if(r < 0 or c < 0):return 0
+    elif(r == 0 or c==0):return 1
+    elif((r,c) in memo): return memo[(r,c)]
+    totalPaths = uniquePathsHelper(r-1,c,memo)+\
+                 uniquePathsHelper(r,c-1,memo)
+    memo[(r,c)] = totalPaths
+    return memo[(r,c)]
+
+def uniquePaths(r,c):
+    memo = {}
+    return uniquePathsHelper(r-1,c-1,memo)
+    

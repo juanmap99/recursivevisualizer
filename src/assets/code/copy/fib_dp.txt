@@ -1,0 +1,14 @@
+from collections import defaultdict
+
+def fibHelper(curNum, memo):
+    if(memo[curNum] != -1):
+        return memo[curNum]
+    memo[curNum] = fibHelper(curNum-1, memo)+\
+                   fibHelper(curNum-2, memo)
+    return memo[curNum]
+
+def fib(curNum):
+    memo = defaultdict(lambda:-1)
+    memo[0] = 0
+    memo[1] = 1
+    return fibHelper(curNum, memo)

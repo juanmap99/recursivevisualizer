@@ -1,0 +1,21 @@
+$sfrom$s collections $simport$s defaultdict
+
+$d$d
+
+$sdef$s $dtotalCombinationSumHelper$d(nums, target):
+    $sif$s(target < $u0$u): 
+        $sreturn$s $u0$u
+    $sif$s(memo[target] != $u-1$u):
+        $sreturn$s memo[target]
+    totalSol = $u0$u
+    $sfor$s num $sin$s nums:
+        totalSol += totalCombinationSumHelper(nums,target-num, memo)
+    memo[target] = totalSol
+    $sreturn$s memo[target]
+
+$d$d
+
+$sdef$s $dtotalCombinationSum$d(nums,target):
+    memo = defaultdict($flambda$f : $u-1$u)
+    memo[$u0$u] = $u1$u
+    $sreturn$s totalCombinationSumHelper(nums,target,memo)

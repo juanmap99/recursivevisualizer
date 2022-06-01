@@ -1,0 +1,7 @@
+def totalCombinationSum(nums, target):
+    if(target == 0): return 1
+    if(target < 0): return 0
+    totalSol = 0
+    for num in nums:
+        totalSol += totalCombinationSum(nums,target-num)
+    return totalSol
