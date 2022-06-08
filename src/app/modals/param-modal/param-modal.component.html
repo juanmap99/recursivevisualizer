@@ -1,0 +1,31 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modall-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Parametros</h1>
+            <ul class="param-list">
+                <li *ngFor="let param of parametros">
+                    <span [style.font-weight]="'450'" 
+                          [style.font-size]="'19px'">{{param.paramName}}</span> = {{param.paramValue }}
+                </li>
+            </ul>
+            <div class="separacion"></div>
+            <p [style.padding-top]="'10px'"><span [style.font-weight]="'450'">ACLARACIÓN:</span>En el caso de programación dinámica, uno de los 
+                parametros que recibe el método es la variable de 'memo' que es utilizada a la 
+                hora de verificar que el valor que deseamos calcular en la llamada actual no 
+                haya sido calculado con anterioridad en función de resolver la problemática del 
+                caso en el cual no se utiliza programación dinámica.</p>
+                <p>Sin embargo, debido a que el memo es un array que no es local a la llamada 
+                    si no que es compartido por todas, el mismo es constantemente cambiante.
+                    Debido a que ese es el caso, el valor del memo no se incluyo en la lista 
+                    de parametros representados en esta modal, si no que el estado actual del mismo puede 
+                    ser corroborado en su sección correspondiente debajo de la tabla.
+                </p>
+        </div>
+    </div>
+</div>

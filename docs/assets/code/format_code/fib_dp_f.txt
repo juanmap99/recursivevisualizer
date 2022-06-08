@@ -1,18 +1,22 @@
 $sfrom$s collections $simport$s defaultdict
 
-$d$d
+$d $d
 
 $sdef$s $dfibHelper$d(curNum, memo):
-    $sif$s(memo[curNum] != $u-1$u):
-        $sreturn$s memo[curNum]
-    memo[curNum] = fibHelper(curNum$u-1$u, memo)+\
-                   fibHelper(curNum$u-2$u, memo)
-    $sreturn$s memo[curNum]
+$b    $b$sif$s(memo[curNum] != $u-1$u):
+$b        $b$sreturn$s memo[curNum]
+    $d $d
+$b    $bmemo[curNum] = fibHelper(curNum$u-1$u, memo)+\
+$b                   $bfibHelper(curNum$u-2$u, memo)
+    $d $d
+$b    $b$sreturn$s memo[curNum]
 
-$d$d
+$d $d
 
 $sdef$s $dfib$d(curNum):
-    memo = defaultdict($flambda$f:$u-1$u)
-    memo[$u0$u] = $u0$u
-    memo[$u1$u] = $u1$u
-    $sreturn$s fibHelper(curNum, memo)
+$b    $bmemo = defaultdict($flambda$f:$u-1$u)
+$b    $bmemo[$u0$u] = $u0$u
+$b    $bmemo[$u1$u] = $u1$u
+$b    $b$sreturn$s fibHelper(curNum, memo)
+
+$d $d

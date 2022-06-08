@@ -1,13 +1,17 @@
 $sdef$s $dmaxProfitRobberHelper$d(nums,index):
-    $sif$s index < $u0$u: $sreturn$s $u0$u
-    robar = nums[index] + maxProfitRobberHelper(nums,index-$u2$u)
-    no_robar = maxProfitRobberHelper(nums,index-$u1$u)
-    maxProfit = max(robar,no_robar)
-    $sreturn$s maxProfit
+$b    $b$sif$s index < $u0$u: $sreturn$s $u0$u
+$b    $b$d $d
+$b    $brobar = nums[index] + maxProfitRobberHelper(nums,index-$u2$u)
+$b    $bno_robar = maxProfitRobberHelper(nums,index-$u1$u)
+$b    $bmaxProfit = max(robar,no_robar)
+    $d $d
+$b    $b$sreturn$s maxProfit
 
-$d$d
+$d $d
 
 $sdef$s $dmaxProfitRobber$d(nums):
-    index = $flen$f(nums)-$u1$u
-    $sreturn$s maxProfitRobberHelper(nums,index)
+$b    $bindex = $flen$f(nums)-$u1$u
+$b    $b$sreturn$s maxProfitRobberHelper(nums,index)
+
+$d $d
     

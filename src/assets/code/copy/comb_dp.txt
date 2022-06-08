@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-def totalCombinationSumHelper(nums, target):
+def totalCombinationSumHelper(nums, target,memo):
     if(target < 0): 
         return 0
     if(memo[target] != -1):

@@ -1,0 +1,91 @@
+
+.responsive-table {
+    li {
+        border-radius: 3px;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    .table-header {
+        background-color: #95A5A6;
+        font-size: 18px;
+        font-weight:400;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        .header-cont{
+            display: flex;
+            flex-direction: row;
+            //flex-wrap: nowrap;
+            align-items: center;
+            .icon-cont{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 9px;
+                padding-bottom: 9px;
+                padding-left: 3px;
+                .icon2{
+                    align-self: flex-start;
+                }
+                .icon{
+                    height: 9px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    align-content: center;
+                }
+                .icon fa-icon{
+                    color:black;
+                    font-size: 15px;
+                    opacity: 40%;
+                }
+                
+                .icon fa-icon:hover{
+                    opacity: 100%;
+                }
+            }
+        }
+    }
+    .table-row {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+        .params{
+            background:none; 
+            border:none;
+            text-decoration: underline;
+            color:#40a6eb;
+        }
+        .params:hover{
+            color:#143b55;
+        }
+    }
+    /*
+    .col-2{
+        flex-basis: 40%;
+        //margin-left: 45px;
+    }
+
+    .col-3{
+        //margin-left: 45px;
+    }
+
+    .col-4{
+        //margin-left: 45px;
+    }
+    */
+    
+    .col-1 {
+        flex-basis: 10%;
+    }
+    .col-2 {
+        flex-basis: 40%;
+    }
+    .col-3 {
+        flex-basis: 25%;
+    }
+    .col-4 {
+        flex-basis: 25%;
+    }
+    
+}

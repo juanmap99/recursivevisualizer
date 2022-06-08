@@ -47,6 +47,7 @@
     <app-execution-body class="exec-container"
                         [style.width]="execBodyDimension.width+'px'" 
                         [style.height]="execBodyDimension.height+'px'"
+                        (paramsModalEvent)="openParamModal($event)"
     ></app-execution-body>
 
     <app-config-panel class="config-container"
@@ -54,6 +55,8 @@
                       [style.height]="configDimension.height+'px'"
                       (explEvent)="displayExplanationModal()"
                       (enunciadoEvent)="displayEnunciadoEvent()"
+                      (execModeEvent)="changeExecMode($event)"
+                      (dpDesiredEvent)="setDPMode($event)"
                       (runEvent)="runProgram($event)">
     </app-config-panel>
 

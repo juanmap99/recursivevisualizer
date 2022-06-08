@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Dimensions } from '../model/Dimensions';
 
 @Injectable({
@@ -7,8 +8,11 @@ import { Dimensions } from '../model/Dimensions';
 export class ContainerSizeService {
   configDimension : Dimensions = {width:0, height:0};
   execBodyDimension : Dimensions = {width:0, height:0};
+  execBodyDimObs : BehaviorSubject<Dimensions>;
 
-  constructor() { }
+  constructor() { 
+    this.execBodyDimObs = new BehaviorSubject<Dimensions>(this.execBodyDimension);
+  }
 
   /**
    * Calcula el ancho y alto en px que tendra la modal en base al tamaño de la pantalla
@@ -32,5 +36,6 @@ export class ContainerSizeService {
   setExecBodyDimensions(containerWidth:number, containerHeight:number){
     this.execBodyDimension.width = containerWidth - this.configDimension.width;
     this.execBodyDimension.height = containerHeight;
+    this.execBodyDimObs.next(this.execBodyDimension);
   }
 }

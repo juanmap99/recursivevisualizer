@@ -5,12 +5,14 @@ import { FibEnunModalComponent } from '../modals/enunciado-modals/fib-enun-modal
 import { HouseRobberEnunModalComponent } from '../modals/enunciado-modals/house-robber-enun-modal/house-robber-enun-modal.component';
 import { TargetSEnunModalComponent } from '../modals/enunciado-modals/target-senun-modal/target-senun-modal.component';
 import { UniquePathsEnunModalComponent } from '../modals/enunciado-modals/unique-paths-enun-modal/unique-paths-enun-modal.component';
+import { ParamModalComponent } from '../modals/param-modal/param-modal.component';
 import { CombSumSolModalComponent } from '../modals/solucion-modals/comb-sum-sol-modal/comb-sum-sol-modal.component';
 import { FibSolModalComponent } from '../modals/solucion-modals/fib-sol-modal/fib-sol-modal.component';
 import { HouseRobberSolModalComponent } from '../modals/solucion-modals/house-robber-sol-modal/house-robber-sol-modal.component';
 import { TargetSSolModalComponent } from '../modals/solucion-modals/target-ssol-modal/target-ssol-modal.component';
 import { UniquePathsSolModalComponent } from '../modals/solucion-modals/unique-paths-sol-modal/unique-paths-sol-modal.component';
 import { Dimensions } from '../model/Dimensions';
+import { Parameter } from '../model/problem-components/Parameter';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,15 @@ export class ModalService {
   constructor(private factoryResolver: ComponentFactoryResolver) {
     this.modalSizeObs = new BehaviorSubject<Dimensions>(this.modalSize);
    }
+
+  openParamModal(hostContainer : ViewContainerRef,parametros : Parameter[]){
+    let modalFactory = this.factoryResolver.resolveComponentFactory(ParamModalComponent);
+    this.modalInstance = hostContainer.createComponent(modalFactory);
+    this.modalInstance.instance.parametros = parametros;
+    this.modalInstance.instance.closeModalEvent.subscribe(() => this.closeModal());
+    this.modalObserver = new Subject<string>();//Usamos subject porque no precisa instanciarlo con un valor.
+    return this.modalObserver.asObservable();
+  }
 
   /**
   * Abre el modal al cual referencia 'explId' insertandolo sobre 'hostContainer'.

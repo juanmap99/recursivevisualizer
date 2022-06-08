@@ -1,7 +1,11 @@
-$sdef$s $dtotalCombinationSum$d(nums, target):
-    $sif$s(target == $u0$u): $sreturn$s $u1$u
-    $sif$s(target < $u0$u): $sreturn$s $u0$u
-    totalSol = $u0$u
-    $sfor$s num $sin$s nums:
-        totalSol += totalCombinationSum(nums,target-num)
-    $sreturn$s totalSol
+0$sdef$s $dtotalCombinationSum$d(nums, target):
+1$b    $b$sif$s(target == $u0$u): $sreturn$s $u1$u
+2$b    $b$sif$s(target < $u0$u): $sreturn$s $u0$u
+-    $d $d
+3$b    $btotalSol = $u0$u
+4$b    $b$sfor$s num $sin$s nums:
+5$b        $btotalSol += totalCombinationSum(nums,target-num)
+-    $d $d
+6$b    $b$sreturn$s totalSol
+-
+-$d $d

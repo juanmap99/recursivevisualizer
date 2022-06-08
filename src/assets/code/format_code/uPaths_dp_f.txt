@@ -1,15 +1,19 @@
 $sdef$s $duniquePathsHelper$d(r,c,memo):
-    $sif$s(r < $u0$u $sor$s c < $u0$u):$sreturn$s $u0$u
-    $selif$s(r == $u0$u $sor$s c==$u0$u):$sreturn$s $u1$u
-    $selif$s((r,c) in memo): $sreturn$s memo[(r,c)]
-    totalPaths = uniquePathsHelper(r-$u1$u,c,memo)+\
-                 uniquePathsHelper(r,c-$u1$u,memo)
-    memo[(r,c)] = totalPaths
-    $sreturn$s memo[(r,c)]
+$b    $b$sif$s(r < $u0$u $sor$s c < $u0$u):$sreturn$s $u0$u
+$b    $b$selif$s(r == $u0$u $sor$s c==$u0$u):$sreturn$s $u1$u
+$b    $b$selif$s((r,c) in memo): $sreturn$s memo[(r,c)]
+    $d $d
+$b    $btotalPaths = uniquePathsHelper(r-$u1$u,c,memo)+\
+$b                 $buniquePathsHelper(r,c-$u1$u,memo)
+$b    $bmemo[(r,c)] = totalPaths
+    $d $d
+$b    $b$sreturn$s memo[(r,c)]
 
 $d $d
 
 $sdef$s $duniquePaths$d(r,c):
-    memo = {}
-    $sreturn$s uniquePathsHelper(r-$u1$u,c-$u1$u,memo)
+$b    $bmemo = {}
+$b    $b$sreturn$s uniquePathsHelper(r-$u1$u,c-$u1$u,memo)
+
+$d $d
     

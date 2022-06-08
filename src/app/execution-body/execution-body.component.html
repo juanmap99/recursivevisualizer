@@ -1,17 +1,28 @@
-<div><!--Contenedor general flexcol-->
-    <div>
-        <!--Codigo-->
+<div [style.height]="contHeight + 'px'" 
+    [style.width]="contWidth + 'px'"
+    [style.text-align]="'center'">
+    
+    <div class="codigo-wrapper"
+        [style.margin-left]="(contWidth-getCodeBoxWidth())/2 + 'px'"        
+        [style.width]="getCodeBoxWidth() + 'px'">
+        <pre class="code"        
+            [style.width]="(getCodeBoxHeight() - 10) + 'px'"
+            [style.background-color]="'#222222'">
+            <div *ngFor="let line of getLines();" 
+                [style.background-color]="line.nroLinea == lineFocus ? 'rgba(47,136,67,.55)':'#222222'"
+                  class="line-wrapper">
+                <code *ngFor="let segment of getLineSegments(line);"
+                    
+                    [ngClass]="getSegmentClass(segment)">{{getSegmentText(segment)}}</code>
+            </div>
+        </pre>
+    
     </div>
-    <div>
-        <!--Contenedor run info data
-        flex row-->
-        <div>
-            <p>En desarollo...</p>
-            <!--Scrollable table
-            Counter | Parent | Tree depth | Parameters | Return(Waiting..(yellow) or value(green))-->
-        </div>
-        <div>
-            <!--Needed? Maybe not-->
-        </div>
+    <div *ngIf="!table.isEmpty"
+        [style.margin-left]="(contWidth-getCodeBoxWidth()-35)/2 + 'px'"        
+        [style.width]="getCodeBoxWidth() + 'px'"
+        [style.overflow]="'auto'"
+        [style.max-height] = "'400px'">
+        <app-data-table (paramsModalEvent)="emitParamsModalEvent($event)"></app-data-table>
     </div>
 </div>

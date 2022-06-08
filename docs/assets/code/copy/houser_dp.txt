@@ -6,6 +6,7 @@ def maxProfitRobberHelper(nums,index,memo):
     robar = nums[index] + maxProfitRobberHelper(nums,index-2,memo)
     no_robar = maxProfitRobberHelper(nums,index-1,memo)
     maxProfit = max(robar,no_robar)
+    memo[index] = maxProfit
     return maxProfit
 
 def maxProfitRobber(nums):

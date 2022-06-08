@@ -1,18 +1,20 @@
 $sdef$s $dtotalTargetSumHelper$d(nums,target,index,curr_sum):
-    $sif$s index < $u0$u $sand$s curr_sum == target:
-        $sreturn$s $u1$u
-    $sif$s index < $u0$u:
-        $sreturn$s $u0$u
-    
-    solsSumando = totalTargetSumHelper(nums,target,index-$u1$u,
-                                    curr_sum + nums[index])
-    solsRestando = totalTargetSumHelper(nums,target,index-$u1$u,
-                                    curr_sum + -nums[index])
-    totalSol = solsSumando + solsRestando
+$b    $b$sif$s index < $u0$u $sand$s curr_sum == target:
+$b        $b$sreturn$s $u1$u
+$b    $b$sif$s index < $u0$u:
+$b        $b$sreturn$s $u0$u
+    $d $d
+$b    $bsolsSumando = totalTargetSumHelper(nums,target,index-$u1$u,
+$b                                    $bcurr_sum + nums[index])
+$b    $bsolsRestando = totalTargetSumHelper(nums,target,index-$u1$u,
+$b                                    $bcurr_sum + -nums[index])
+$b    $btotalSol = solsSumando + solsRestando
+    $d $d
+$b    $b$sreturn$s totalSol
 
-    $sreturn$s totalSol
-
-$d$d
+$d $d
 
 $sdef$s $dtotalTargetSum$d(nums,target):
-    $sreturn$s totalTargetSumHelper(nums,target,$flen$f(nums)-$u1$u,$u0$u)
+$b    $b$sreturn$s totalTargetSumHelper(nums,target,$flen$f(nums)-$u1$u,$u0$u)
+
+$d $d

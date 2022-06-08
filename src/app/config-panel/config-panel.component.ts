@@ -9,7 +9,7 @@ import { RunControllerService } from '../services/run-controller.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCheckboxChange} from '@angular/material/checkbox';
 import { ProblemControllerService } from '../services/problem-controller.service';
-import { Problem } from '../model/problem-components/Problem';
+import { Problem } from '../model/problems-alg/Problem';
 import { Parameter } from '../model/problem-components/Parameter';
 import { RunParams } from '../model/run/RunParams';
 import { RunMode } from '../model/run/RunMode';
@@ -34,6 +34,8 @@ export class ConfigPanelComponent{
   @Output() explEvent = new EventEmitter<string>();
   @Output() enunciadoEvent = new EventEmitter<string>();
   @Output() runEvent = new EventEmitter<RunParams>();
+  @Output() execModeEvent = new EventEmitter<RunMode>()
+  @Output() dpDesiredEvent = new EventEmitter<boolean>()
   
   userModeButtonActive: boolean = false;
   
@@ -106,9 +108,10 @@ export class ConfigPanelComponent{
    * 
    * @param valueChecked Instancia del MatRadioChange que contiene el tipo de uso deseado
    */
-  recordInteraction(valueChecked: MatRadioChange){
+   recordExecModeInteraction(valueChecked: MatRadioChange){
     this.manual = valueChecked.value == "true" ? true : false;
     this.userModeButtonActive = true;
+    this.execModeEvent.emit(this.manual ? RunMode.MANUAL : RunMode.AUTOMATIC);
   }
 
   /**
@@ -138,6 +141,7 @@ export class ConfigPanelComponent{
 
   setDPDesired(event : MatCheckboxChange){
     this.DPDesired = event.checked;
+    this.dpDesiredEvent.emit(this.DPDesired);
   }
 
 

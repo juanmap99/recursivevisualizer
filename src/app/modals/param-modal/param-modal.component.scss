@@ -1,0 +1,26 @@
+@use "../modal-standard.scss";
+
+.param-list{
+    font-size: 18px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+p{
+    font-size: 16px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.separacion{
+    opacity: 85%;
+    border: solid black;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 1px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    width: 100%;
+    margin: 0.15em auto;
+}

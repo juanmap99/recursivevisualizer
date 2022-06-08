@@ -19,4 +19,4 @@ def totalTargetSumHelper(nums,target,index,curr_sum,memo):
 def totalTargetSum(nums,target):
     memo = {}
     index = len(nums)-1
-    return totalTargetSumHelper(nums,target,len(nums)-1,0,memo)
+    return totalTargetSumHelper(nums,target,index,0,memo)

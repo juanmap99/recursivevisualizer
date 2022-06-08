@@ -40,7 +40,7 @@ export class ProblemConfig{
      * @param velocidad Entero con valores posibles del 1 al 5 que determina el delay del programa
     */
     setRunDelay(velocidad: number){
-        let speedToDelayDic = [500,250,100,60,30];
+        let speedToDelayDic = [1000,500,250,100,60];
         this.delay = speedToDelayDic[velocidad -1];
     }
 

@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Dimensions } from './model/Dimensions';
+import { Parameter } from './model/problem-components/Parameter';
+import { RunMode } from './model/run/RunMode';
 import { RunParams } from './model/run/RunParams';
 import { ContainerSizeService } from './services/container-size-service.service';
 import { ModalService } from './services/modal.service';
@@ -150,11 +152,26 @@ export class AppComponent implements OnInit {
                  })
   }
 
+  changeExecMode(mode : RunMode){
+    this.runServ.setRunningMode(mode);
+  }
+
+  setDPMode(dpDesired : boolean){
+    this.problemContServ.setDPMode(dpDesired);
+  }
   /**
    Utiliza el servicio que maneja las modals para indicarle que cierre la misma
    */
   closeModal(){
     this.modalServ.closeModal();
+  }
+
+  openParamModal(parameters : Parameter[]){
+    this.openModal = true;
+    this.modalServ.openParamModal(this.modalContainer, parameters)
+                 .subscribe(() =>{
+                   this.openModal = false;
+                 })
   }
   
 }

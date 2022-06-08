@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Problem } from '../model/problems-alg/Problem';
 import { RunMode } from '../model/run/RunMode';
 import { RunParams } from '../model/run/RunParams';
 
@@ -7,9 +8,10 @@ import { RunParams } from '../model/run/RunParams';
   providedIn: 'root'
 })
 export class RunControllerService {
-  runningMode? : RunMode;
+  runningMode : RunMode = RunMode.MANUAL;
   running : boolean;
   runObs : BehaviorSubject<boolean>;
+  runningModeObs : BehaviorSubject<RunMode>
   //estadoModoManual : EstadoEjecucionM = {estadoVariables:[],codPasoRealizar:0};
 
   /**
@@ -21,6 +23,7 @@ export class RunControllerService {
   constructor() { 
     this.running = false;
     this.runObs = new BehaviorSubject<boolean>(this.running);
+    this.runningModeObs = new BehaviorSubject<RunMode>(this.runningMode)
   }
 
 
@@ -31,12 +34,13 @@ export class RunControllerService {
    */
   setRunningMode(runMode : RunMode){
     this.runningMode = runMode;
+    this.runningModeObs.next(this.runningMode);
   }
 
-  runProgram(runMode : RunMode){
+  runProgram(runMode : RunMode, problem : Problem){
     this.runningMode = runMode;
     this.activateRunningMode()
-    this.runningMode == RunMode.AUTOMATIC ? this.runAutomaticSorting() :
+    this.runningMode == RunMode.AUTOMATIC ? this.runAutomaticSorting(problem) :
                                             this.runManualSortingStep();
   }
 
@@ -45,8 +49,9 @@ export class RunControllerService {
    * se hayan definido los parametros necesarios para realizar la ejecucion
    * 
    */
-  async runAutomaticSorting(){
-
+  async runAutomaticSorting(problem : Problem){
+    await problem.runAutomatic()
+    this.stopRunningMode()
   }
 
   /**

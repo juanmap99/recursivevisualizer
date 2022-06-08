@@ -1,0 +1,58 @@
+<ul [style.width]="getCodeBoxWidth() + 'px'"
+    [style.min-width]="'700px'"
+    class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1 header-cont">
+        <span>Counter</span>
+        <div class="icon-cont">
+          <div class="icon">
+            <fa-icon (click)="sortByCounter(true)" [icon]="iconUp"></fa-icon>
+          </div>
+          <div class="icon icon2">
+            <fa-icon (click)="sortByCounter(false)" [icon]="iconDown"></fa-icon>
+          </div>
+        </div>
+      </div>
+      <div class="col col-2 header-cont">
+        <span [style.margin-left]="'88px'">Tree depth</span>
+        <div class="icon-cont">
+          <div class="icon">
+            <fa-icon (click)="sortByTreeDepth(true)" [icon]="iconUp"></fa-icon>
+          </div>
+          <div class="icon">
+            <fa-icon (click)="sortByTreeDepth(false)" [icon]="iconDown"></fa-icon>
+          </div>
+        </div>
+      </div>
+      <div class="col col-3 header-cont">
+        <span [style.margin-left]="'31px'">Parameters</span>
+      </div>
+      <div class="col col-4 header-cont">
+        <span [style.margin-left]="'50px'">Output</span>
+        <div class="icon-cont">
+          <div class="icon">
+            <fa-icon (click)="sortByOutput(true)" [icon]="iconUp"></fa-icon>
+          </div>
+          <div class="icon">
+            <fa-icon (click)="sortByOutput(false)" [icon]="iconDown"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li *ngFor="let el of table.data" 
+        [style.background-color]="el.values.counter == 1 && !isRunning ? '#F5F500' : '#ffffff'"
+        class="table-row">
+      <div class="col col-1" 
+          data-label="Counter">{{el.values.counter}}</div>
+      <div class="col col-2" data-label="Tree depth">{{el.values.treeDepth}}</div>
+      <div class="col col-3" data-label="Parameters">
+        <button (click)="emitParamsModalEvent(el.values.parameters)"class="params">Parametros</button>
+      </div>
+      <div class="col col-4" 
+           data-label="Output" 
+           [style.font-weight]="isNan(el.values.returnVal) ? '400' : el.values.counter == 1 && !isRunning ? '450' : '400'"
+           [style.color]="isNan(el.values.returnVal) ? '#A155C5' : el.values.counter == 1 && !isRunning ? '#00991F' : 'black'">
+        {{isNan(el.values.returnVal) ? "Waiting.." : el.values.returnVal}}
+      </div>
+    </li>
+</ul>

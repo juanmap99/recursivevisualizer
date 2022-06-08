@@ -1,5 +1,10 @@
-$sdef$s $dfib$d(curNum):
-    $sif$s(curNum == $u0$u $sor$s curNum == $u1$u):
-        $sreturn$s curNum
-    $sreturn$s fib(curNum-$u1$u) + fib(curNum-$u2$u)
-    
+1$sdef$s $dfib$d(curNum):
+2$b    $b$sif$s(curNum == $u0$u $sor$s curNum == $u1$u):
+3$b        $b$sreturn$s curNum
+    $d $d
+4$b    $bfibMenosUno = fib(curNum-$u1$u)    
+5$b    $bfibMenosDos = fib(curNum-$u2$u) 
+    $d $d
+6$b    $b$sreturn$s fibMenosUno + fibMenosDos
+
+$d $d
