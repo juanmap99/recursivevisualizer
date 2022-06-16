@@ -1,17 +1,18 @@
-$sdef$s $dmaxProfitRobberHelper$d(nums,index):
-$b    $b$sif$s index < $u0$u: $sreturn$s $u0$u
-$b    $b$d $d
-$b    $brobar = nums[index] + maxProfitRobberHelper(nums,index-$u2$u)
-$b    $bno_robar = maxProfitRobberHelper(nums,index-$u1$u)
-$b    $bmaxProfit = max(robar,no_robar)
-    $d $d
-$b    $b$sreturn$s maxProfit
-
-$d $d
-
-$sdef$s $dmaxProfitRobber$d(nums):
-$b    $bindex = $flen$f(nums)-$u1$u
-$b    $b$sreturn$s maxProfitRobberHelper(nums,index)
-
-$d $d
-    
+1$sdef$s $dmaxProfitRobberHelper$d(arr_casas,index):
+2$b    $b$sif$s index < $u0$u: 
+3$b        $b$sreturn$s $u0$u
+-$b    $b$d $d
+4$b    $brobar = arr_casas[index] + maxProfitRobberHelper(arr_casas,index-$u2$u)
+5$b    $bno_robar = maxProfitRobberHelper(arr_casas,index-$u1$u)
+6$b    $bmaxProfit = max(robar,no_robar)
+-    $d $d
+7$b    $b$sreturn$s maxProfit
+-
+-$d $d
+-
+8$sdef$s $dmaxProfitRobber$d(arr_casas):
+9$b    $bindex = $flen$f(arr_casas)-$u1$u
+10$b    $b$sreturn$s maxProfitRobberHelper(arr_casas,index)
+-
+-$d $d
+-   

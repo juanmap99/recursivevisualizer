@@ -1,16 +1,19 @@
-$sdef$s $duniquePathsHelper$d(r,c):
-$b    $b$sif$s(r < $u0$u $sor$s c < $u0$u):$sreturn$s $u0$u
-$b    $b$selif$s(r == $u0$u $sor$s c==$u0$u):$sreturn$s $u1$u
-    $d $d
-$b    $btotalPaths = uniquePathsHelper(r-$u1$u,c)+\
-$b                 $buniquePathsHelper(r,c-$u1$u)
-    $d $d
-$b    $b$sreturn$s totalPaths
-
-$d $d
-
-$sdef$s $duniquePaths$d(r,c):
-$b    $b$sreturn$s uniquePathsHelper(r-$u1$u,c-$u1$u)
-
-$d $d
-    
+1$sdef$s $duniquePathsHelper$d(r,c):
+2$b    $b$sif$s(r < $u0$u $sor$s c < $u0$u):
+3$b        $b$sreturn$s $u0$u
+4$b    $b$selif$s(r == $u0$u $sor$s c==$u0$u):
+5$b        $b$sreturn$s $u1$u
+-$d $d
+6$b    $bpathsMovingLeft = uniquePathsHelper(r-$u1$u,c)
+7$b    $bpathsMovingDown = uniquePathsHelper(r,c-$u1$u)
+8$b    $btotalPaths = pathsMovingLeft + pathsMovingDown
+-$d $d
+9$b    $b$sreturn$s totalPaths
+-
+-$d $d
+-
+10$sdef$s $duniquePaths$d(r,c):
+11$b    $b$sreturn$s uniquePathsHelper(r-$u1$u,c-$u1$u)
+-
+-$d $d
+-   
