@@ -3,13 +3,15 @@ import { ProblemConfig } from "../problem-components/ProblemConfig";
 import { ProblemControllerService } from "src/app/services/problem-controller.service";
 import { CodeBgService } from "src/app/services/code-bg.service";
 import { TableManagerService } from "src/app/services/table-manager.service";
+import { MemoService } from "src/app/services/memo.service";
 
 export abstract class Problem{
     protected problemConfig : ProblemConfig;
     protected dpDesired : boolean = false;
 
     constructor(protected codeBg : CodeBgService,
-                protected tableServ : TableManagerService){
+                protected tableServ : TableManagerService,
+                protected memoServ : MemoService){
         this.problemConfig = this.buildProblemConfig();
     }
 

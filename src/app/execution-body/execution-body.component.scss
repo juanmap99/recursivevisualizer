@@ -1,6 +1,20 @@
+.exec-wrapper{
+    display: flex;
+    flex-direction: column;
+}
 .codigo-wrapper{
     display: flex;
     flex-direction: row;
+    .depth-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        //background-color:#222222;
+        border: #222222 1px solid;
+        border-right: 0px;
+        color: #B23FB2;
+    }
 }
 
 .code{
@@ -80,6 +94,13 @@
     color:#08a029;
 }
 
+
+.bod-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
     width: 20px;
@@ -99,3 +120,78 @@
   ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
   }
+
+
+  .responsive-table {
+    li {
+        border-radius: 3px;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+        height: 30px;
+    }
+    .table-header {
+        background-color: #95A5A6;
+        font-size: 20px;
+        font-weight:400;
+        margin-top: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+    .table-row {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+        font-size: 18px;
+        .entry{
+            display: flex;
+            flex-direction: row;;
+            justify-content: center;
+            align-items: center;
+            .key{
+                text-align: center;
+                margin-right: 10px;
+                color:#4e50e7;
+            }
+            .value{
+                text-align: center;
+                color:#3ca739;
+                padding-left: 7px;
+            }
+            .vl{
+                border: 0.2px black solid;
+                opacity: 0.5;
+                height: 30px;
+            }
+        }
+    }
+    /*
+    .col-2{
+        flex-basis: 40%;
+        //margin-left: 45px;
+    }
+
+    .col-3{
+        //margin-left: 45px;
+    }
+
+    .col-4{
+        //margin-left: 45px;
+    }
+    */
+    
+    .col-1 {
+        flex-basis: 10%;
+    }
+    .col-2 {
+        flex-basis: 40%;
+    }
+    .col-3 {
+        flex-basis: 25%;
+    }
+    .col-4 {
+        flex-basis: 25%;
+    }
+    
+}

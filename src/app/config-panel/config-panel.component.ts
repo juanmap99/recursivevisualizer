@@ -69,12 +69,59 @@ export class ConfigPanelComponent{
   runProgram(){
     let runParams : RunParams = {
       runMode : !this.manual ? RunMode.AUTOMATIC : RunMode.MANUAL,
-      parameters : this.algorithmParameters,
+      parameters : this.fixParametersTypes(this.algorithmParameters),
       velocity : this.runSpeed,
       memorization : this.DPDesired
     }
     this.runEvent.emit(runParams);
   }
+
+  fixParametersTypes(parameters : Parameter[]) : Parameter[]{
+    let parameters_copy : Parameter[] = [];
+    for(let param of parameters){
+      parameters_copy.push({
+        paramName : param.paramName,
+        paramValue: param.paramValue,
+        placeholder: param.placeholder,
+        maxLength: param.maxLength,
+        paramType : param.paramType
+      })
+    }
+    for(let param of parameters_copy){
+      param.paramValue = this.fixValueRepresentation(param.paramValue);
+    }
+    return parameters_copy;
+  }
+
+  fixValueRepresentation(val : string){
+    if(val.match(/^[0-9]+$/) != null){
+      return +val;
+    }
+    if(val.charAt(0) == '['){
+      return this.mapIntoNumericArray(val);
+    }
+    //Si algun dia recibimos matriz por param habría que castearla aca.
+    return val;
+  }
+
+  mapIntoNumericArray(arr:string) : number[]{
+    let isNumber = (c :string) => c >= '0' && c <= '9';
+    let res : number[] = []
+    let i = 0;
+    while(i < arr.length){
+      let temp = "";
+      while(i < arr.length && isNumber(arr.charAt(i))){
+        temp += arr.charAt(i)
+        i += 1;
+      }
+      if(temp != ""){
+        res.push(+temp);
+      }
+      i+=1
+    }
+    return res;
+  }
+
 
   /**
    * Setea la variable local 'runSpeed' al grado de velocidada definido por el usuario

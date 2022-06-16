@@ -11,6 +11,7 @@ import { RunParams } from '../model/run/RunParams';
 import { RunControllerService } from './run-controller.service';
 import { CodeBgService } from './code-bg.service';
 import { TableManagerService } from './table-manager.service';
+import { MemoService } from './memo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,9 @@ export class ProblemControllerService {
 
   constructor(private runServ : RunControllerService,
              private codeBg : CodeBgService,
-             private tableServ : TableManagerService) { 
-    this.selectedProblem = new Fibonacci(codeBg,tableServ);
+             private tableServ : TableManagerService,
+             private memoServ : MemoService) { 
+    this.selectedProblem = new Fibonacci(codeBg,tableServ,memoServ);
     this.selecProblemObs = new BehaviorSubject<Problem>(this.selectedProblem);
     this.dpMode = false;
     this.dpModeObs = new BehaviorSubject<boolean>(this.dpMode);
@@ -33,21 +35,23 @@ export class ProblemControllerService {
   setSelectedProblem(problem : string) {
     switch(problem){
       case("Fibonacci"):
-        this.selectedProblem = new Fibonacci(this.codeBg,this.tableServ);
+        this.selectedProblem = new Fibonacci(this.codeBg,this.tableServ,this.memoServ);
         break;
       case("TargetSum"):
-        this.selectedProblem = new TargetSum(this.codeBg,this.tableServ);
+        this.selectedProblem = new TargetSum(this.codeBg,this.tableServ,this.memoServ);
         break;
       case("CombSum"):
-        this.selectedProblem = new CombinationSum(this.codeBg,this.tableServ);
+        this.selectedProblem = new CombinationSum(this.codeBg,this.tableServ,this.memoServ);
         break;
       case("HouseRobber"):
-        this.selectedProblem = new HouseRobber(this.codeBg,this.tableServ);
+        this.selectedProblem = new HouseRobber(this.codeBg,this.tableServ,this.memoServ);
         break;
       case("UniquePaths"):
-        this.selectedProblem = new UniquePaths(this.codeBg,this.tableServ);
+        this.selectedProblem = new UniquePaths(this.codeBg,this.tableServ,this.memoServ);
         break;
     }
+    this.tableServ.clearRows();
+    this.memoServ.clearMemo();
     this.selectedProblem.setDpDesired(this.dpMode);
     this.updateObs();
   }
