@@ -8,3 +8,4 @@
 6$b    $b$sreturn$s fibMenosUno + fibMenosDos
 -
 -$d $d
+-$d $d

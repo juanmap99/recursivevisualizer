@@ -18,6 +18,7 @@ export class DataTableComponent implements OnInit {
   iconUp = faSortUp;
   iconDown = faSortDown;
   isRunning : boolean = false;
+  headerSize : number = 18;
   @Output() paramsModalEvent = new EventEmitter<Parameter[]>();
 
   constructor(private tableManager  :TableManagerService,
@@ -26,6 +27,7 @@ export class DataTableComponent implements OnInit {
     this.runServ.runObs.subscribe(running => this.isRunning = running);
     this.tableManager.tableObs.subscribe(newTable => this.table = newTable);
     this.sizeServ.execBodyDimObs.subscribe(newSize =>{
+      this.headerSize = this.contWidth > 1300 ? 16 : 12;
       this.contWidth = newSize.width;
       this.contHeight = newSize.height;
     })

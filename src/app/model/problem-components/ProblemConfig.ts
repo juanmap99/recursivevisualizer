@@ -12,6 +12,22 @@ export class ProblemConfig{
         this.delay = 500;
         this.runningMode = RunMode.AUTOMATIC;
     }
+    
+
+    isPositiveArray(value : any) : boolean{
+        if(!Array.isArray(value)){
+            return false;
+        }
+        if(value.length == 0){
+            return false;
+        }
+        for(let item of value){
+            if(typeof item !== 'number' || item < 0){
+                return false;
+            }
+        }
+        return true;
+    }
 
     addParameter(param: Parameter){
         this.parameters.push(param);

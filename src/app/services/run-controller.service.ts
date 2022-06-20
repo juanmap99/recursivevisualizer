@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ManualAlg } from '../model/manual-mode/ManualAlg';
+import { ManualDirector } from '../model/manual-mode/ManualDirector';
 import { Problem } from '../model/problems-alg/Problem';
 import { RunMode } from '../model/run/RunMode';
 import { RunParams } from '../model/run/RunParams';
@@ -12,7 +14,9 @@ export class RunControllerService {
   running : boolean;
   runObs : BehaviorSubject<boolean>;
   runningModeObs : BehaviorSubject<RunMode>
-  //estadoModoManual : EstadoEjecucionM = {estadoVariables:[],codPasoRealizar:0};
+  manualDirector : ManualDirector;
+  modoManualDisabled : boolean;
+  modoManualDisabledObs : BehaviorSubject<boolean>;
 
   /**
    * Constructor del servicio.
@@ -22,8 +26,21 @@ export class RunControllerService {
    */
   constructor() { 
     this.running = false;
+    this.modoManualDisabled = false;
     this.runObs = new BehaviorSubject<boolean>(this.running);
     this.runningModeObs = new BehaviorSubject<RunMode>(this.runningMode)
+    this.manualDirector = new ManualDirector()
+    this.modoManualDisabledObs = new BehaviorSubject<boolean>(this.modoManualDisabled);
+  }
+
+  modoManualOnHold(){
+    this.modoManualDisabled = true;
+    this.modoManualDisabledObs.next(this.modoManualDisabled);
+  }
+
+  unholdManualMode(){
+    this.modoManualDisabled = false;
+    this.modoManualDisabledObs.next(this.modoManualDisabled);
   }
 
 
@@ -54,6 +71,14 @@ export class RunControllerService {
     this.stopRunningMode()
   }
 
+
+  delayBy(delay : number){
+    return new Promise(resolve => {
+        setTimeout(function() {
+        resolve("Delay completado");
+        }, delay);
+    });
+  }
   /**
    * Realiza el siguiente paso siempre y cuando el modo de ejecucion sea manual y asigna
    * el siguiente estado a la variable de clase 'estadoModoManual' para en el siguiente
@@ -61,7 +86,17 @@ export class RunControllerService {
    * 
    */
   async runManualSortingStep(){
-
+    let isOver : boolean = this.manualDirector.runNextStep();
+    if(isOver){
+      this.stopProgram();
+    }
+    this.modoManualOnHold();
+    await this.delayBy(100);
+    this.unholdManualMode();
+  }
+  
+  setAlgorithm(alg : ManualAlg){
+    this.manualDirector.setManualAlg(alg);
   }
 
   /**
@@ -69,6 +104,7 @@ export class RunControllerService {
    * booleane 'running' con el valor false.
    */
   stopProgram(){
+    this.manualDirector.stopExecution();
     this.stopRunningMode();
   }
 

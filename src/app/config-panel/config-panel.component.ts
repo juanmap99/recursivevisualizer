@@ -13,6 +13,8 @@ import { Problem } from '../model/problems-alg/Problem';
 import { Parameter } from '../model/problem-components/Parameter';
 import { RunParams } from '../model/run/RunParams';
 import { RunMode } from '../model/run/RunMode';
+import { ParametrosErroneosComponent } from '../error-dialog/parametros-erroneos/parametros-erroneos.component';
+import { UserModeWarningComponent } from '../error-dialog/user-mode-warning/user-mode-warning.component';
 
 @Component({
   selector: 'app-config-panel',
@@ -67,13 +69,23 @@ export class ConfigPanelComponent{
    * con los contenidos del componente 'UserModeWarningComponent'.
    */
   runProgram(){
-    let runParams : RunParams = {
-      runMode : !this.manual ? RunMode.AUTOMATIC : RunMode.MANUAL,
-      parameters : this.fixParametersTypes(this.algorithmParameters),
-      velocity : this.runSpeed,
-      memorization : this.DPDesired
+    if(!this.userModeButtonActive){
+      this.dialog.open(UserModeWarningComponent);
     }
-    this.runEvent.emit(runParams);
+    else{
+      let runParams : RunParams = {
+        runMode : !this.manual ? RunMode.AUTOMATIC : RunMode.MANUAL,
+        parameters : this.fixParametersTypes(this.algorithmParameters),
+        velocity : this.runSpeed,
+        memorization : this.DPDesired
+      }
+      if(!this.problemContServ.paramsAreValid(runParams.parameters)){
+        this.dialog.open(ParametrosErroneosComponent)
+      }
+      else{
+        this.runEvent.emit(runParams);
+      }
+    }
   }
 
   fixParametersTypes(parameters : Parameter[]) : Parameter[]{
@@ -94,6 +106,7 @@ export class ConfigPanelComponent{
   }
 
   fixValueRepresentation(val : string){
+    val = val.trim();
     if(val.match(/^[0-9]+$/) != null){
       return +val;
     }
@@ -105,12 +118,12 @@ export class ConfigPanelComponent{
   }
 
   mapIntoNumericArray(arr:string) : number[]{
-    let isNumber = (c :string) => c >= '0' && c <= '9';
+    let isNumber = (c :string) => (c >= '0' && c <= '9');
     let res : number[] = []
     let i = 0;
     while(i < arr.length){
       let temp = "";
-      while(i < arr.length && isNumber(arr.charAt(i))){
+      while(i < arr.length && (isNumber(arr.charAt(i)) || (arr.charAt(i) == "-" && temp == ""))){
         temp += arr.charAt(i)
         i += 1;
       }

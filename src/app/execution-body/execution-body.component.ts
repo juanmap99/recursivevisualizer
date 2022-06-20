@@ -28,10 +28,15 @@ export class ExecutionBodyComponent implements OnInit {
   running : boolean = false;
   lenDepth : number = 1;
   curDepth : number = 0;
+  curCounter : number = 0;
   lineFocus : number = -1;
   dpOn : boolean = false;
+  modoManualOn : boolean = false;
+  modoManualDisabled : boolean = false;
   memo : Memo = new Memo();
   table : DataTable = new DataTable();
+  buttonWidth : number = 0;
+  buttonSectionMargin : number = 0;
   @Output() paramsModalEvent = new EventEmitter<Parameter[]>();
   
   constructor(private sizeServ : ContainerSizeService,
@@ -41,6 +46,10 @@ export class ExecutionBodyComponent implements OnInit {
               private runServ : RunControllerService,
               private memoServ : MemoService,
               private probContr : ProblemControllerService) { 
+                this.runServ.modoManualDisabledObs.subscribe(dis => this.modoManualDisabled = dis);
+                this.runServ.runningModeObs.subscribe(newMode => {
+                  this.modoManualOn = newMode == RunMode.MANUAL ? true : false;
+                })
                 this.probContr.dpModeObs.subscribe(dpOn =>this.dpOn = dpOn);
                 this.memoServ.memoObs.subscribe(newMemo => {
                   this.memo = newMemo
@@ -53,13 +62,25 @@ export class ExecutionBodyComponent implements OnInit {
                   this.curDepth = newDepth;
                   this.lenDepth = this.curDepth.toString().length;
                 });
+                this.codeBgserv.curCounterObs.subscribe(newC => this.curCounter = newC);
                 this.codeManag.codigoObs.subscribe(newCode => this.code = newCode);
                 this.sizeServ.execBodyDimObs.subscribe(newSize =>{
+                  this.buttonWidth = newSize.width > 1190 ? 150 : 115;
+                  this.buttonSectionMargin = newSize.width > 1190 ? 50 : 30;
                   this.contWidth = newSize.width;
                   this.contHeight = newSize.height;
                 })
     }
 
+  doNextStep(){
+    this.runServ.runManualSortingStep();
+  }
+
+  stopRunningProgram(){
+    this.probContr.killExecution()
+    //this.runServ.stopProgram();
+  }
+  
   lengthToWidth(){
     if(this.lenDepth == 1){
       return 35;

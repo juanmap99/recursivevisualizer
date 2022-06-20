@@ -3,36 +3,63 @@
     [style.text-align]="'center'">
     
     <div class="bod-wrapper">
+        <div class="controller-buttons-section"
+             [style.height]="contHeight*0.60+'px'"
+             [style.margin-left] = "buttonSectionMargin +'px'">
+            <div class="next-step-container-wrapper"
+                (click)="modoManualDisabled ? '' : doNextStep()">
+                <div [style.visibility]="(running && modoManualOn) ? 'visible' : 'hidden'" 
+                    [style.width] = "buttonWidth +'px'"
+                    [ngClass]="modoManualDisabled ? 'disabled-next-step' : 'next-step-wrapper'">
+                    <a>Next Step</a>
+                </div>
+            </div>
+            <div class="run-container-wrapper" (click)="running ? stopRunningProgram() : ''" >
+                <div [style.visibility]="running ? 'visible' : 'hidden'" 
+                     [style.width] = "buttonWidth +'px'"
+                     [style.margin-top] = "10 +'px'"
+                     class="run-wrapper">
+                    <a>Stop</a>
+                </div>
+            </div>
+        </div>
+
         <div class="exec-wrapper">
             <div class="codigo-wrapper"
-            [style.margin-left]="((contWidth-getCodeBoxWidth())/2) - lengthToWidth() + 'px'"        
+            [style.margin-left]="((contWidth-getCodeBoxWidth())/2) - buttonWidth - buttonSectionMargin + 'px'"        
             [style.width]="getCodeBoxWidth() + 'px'">
+                <!--
                 <div class="depth-container" 
                     [style.height]="'40px'"
                     [style.width]="lengthToWidth() +'px'"
                     [style.visibility]=" running ? 'visible' : 'hidden'">
                     {{curDepth}}
                 </div>
+                -->
                 <pre class="code"        
                     [style.width]="(getCodeBoxHeight() - 10) + 'px'"
                     [style.background-color]="'#222222'">
-                    <div *ngFor="let line of getLines();" 
+                    <div *ngFor="let line of getLines(); let iL=index;" 
                         [style.background-color]="line.nroLinea == lineFocus ? 'rgba(47,136,67,.55)':'#222222'"
                         class="line-wrapper">
-                        <code *ngFor="let segment of getLineSegments(line);"
-                            
-                            [ngClass]="getSegmentClass(segment)">{{getSegmentText(segment)}}</code>
+                        <code *ngFor="let segment of getLineSegments(line); let i=index;"
+                            [ngClass]="getSegmentClass(segment)">{{getSegmentText(segment)}}<span *ngIf="iL == code.lineas.length-1 && i==line.contenido.length-1 && running"
+                                                                                                  [style.color]="'#D766FE'"
+                                                                                                  >Depth:{{curDepth}}</span><span *ngIf="iL == code.lineas.length-1 && i==line.contenido.length-1 && running"
+                                                                                                  [style.color]="'#FED766'"
+                                                                                                  >  Counter:{{curCounter}}</span></code>                  
                     </div>
                 </pre>      
             </div>
-            <div *ngIf="!table.isEmpty"
-                [style.margin-left]="(contWidth-getCodeBoxWidth()-35)/2 + 'px'"        
-                [style.width]="getCodeBoxWidth() + 'px'"
+            <!--[style.width]="getCodeBoxWidth() - 12 + 'px'"-->
+            <div *ngIf="!table.isEmpty"               
+                [style.margin-left]="((contWidth-getCodeBoxWidth())/2) - buttonWidth - buttonSectionMargin - 18 + 'px'"              
                 [style.overflow]="'auto'"
-                [style.max-height] = "'350px'">
+                [style.max-height] = "'330px'">
                 <app-data-table (paramsModalEvent)="emitParamsModalEvent($event)"></app-data-table>
             </div>   
         </div>
+
         <div class="memo-wrapper"
             *ngIf="dpOn && !memo.empty"
             [style.overflow]="'auto'"
@@ -55,5 +82,6 @@
                 </li>
             </ul>
         </div> 
+
     </div>
 </div>

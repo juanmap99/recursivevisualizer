@@ -61,7 +61,10 @@ export class AppComponent implements OnInit {
 
   setCurrentProblem(algoritmoElegido : string){
     if(this.algoritmoElegido != algoritmoElegido){
-        if(this.running)this.runServ.stopProgram();
+        if(this.running){
+          //this.runServ.stopProgram();
+          this.problemContServ.killExecution()
+        }
         this.algoritmoElegido = algoritmoElegido;
         this.problemContServ.setSelectedProblem(algoritmoElegido);
     }

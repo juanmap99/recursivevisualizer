@@ -22,6 +22,8 @@ import { HouseRobberEnunModalComponent } from './modals/enunciado-modals/house-r
 import { UniquePathsEnunModalComponent } from './modals/enunciado-modals/unique-paths-enun-modal/unique-paths-enun-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { ParamModalComponent } from './modals/param-modal/param-modal.component';
+import { ParametrosErroneosComponent } from './error-dialog/parametros-erroneos/parametros-erroneos.component';
+import { UserModeWarningComponent } from './error-dialog/user-mode-warning/user-mode-warning.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { ParamModalComponent } from './modals/param-modal/param-modal.component'
     UniquePathsEnunModalComponent,
     DataTableComponent,
     ParamModalComponent,
+    ParametrosErroneosComponent,
+    UserModeWarningComponent,
   ],
   imports: [
     BrowserModule,

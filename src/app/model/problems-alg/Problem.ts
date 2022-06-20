@@ -4,15 +4,28 @@ import { ProblemControllerService } from "src/app/services/problem-controller.se
 import { CodeBgService } from "src/app/services/code-bg.service";
 import { TableManagerService } from "src/app/services/table-manager.service";
 import { MemoService } from "src/app/services/memo.service";
+import { Parameter } from "../problem-components/Parameter";
 
 export abstract class Problem{
     protected problemConfig : ProblemConfig;
+    protected problemName : string;
     protected dpDesired : boolean = false;
+    protected run : boolean = true;
 
     constructor(protected codeBg : CodeBgService,
                 protected tableServ : TableManagerService,
-                protected memoServ : MemoService){
+                protected memoServ : MemoService,
+                protected probName : string){
         this.problemConfig = this.buildProblemConfig();
+        this.problemName = probName;
+    }
+
+    stopRun(){
+      this.run = false;
+    }
+
+    getProblemName(){
+      return this.problemName;
     }
 
     getProblemConfig(): ProblemConfig{return this.problemConfig;}
@@ -60,7 +73,7 @@ export abstract class Problem{
 
     abstract getProblemID() : string;
 
-    
+    abstract paramsAreValid(params: Parameter[]):boolean;
   /**
    * Dado un nodo, retorna la posicion en la que se encuentra el padre.
    * 

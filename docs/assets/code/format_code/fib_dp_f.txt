@@ -6,8 +6,8 @@
 3$b    $b$sif$s(memo[curNum] != $u-1$u):
 4$b        $b$sreturn$s memo[curNum]
 -$d $d
-5$b    $bfibMenosUno = fib(curNum-$u1$u, memo)    
-6$b    $bfibMenosDos = fib(curNum-$u2$u, memo) 
+5$b    $bfibMenosUno = fibHelper(curNum-$u1$u, memo)    
+6$b    $bfibMenosDos = fibHelper(curNum-$u2$u, memo) 
 7$b    $bmemo[curNum] = fibMenosUno + fibMenosDos
 -$d $d
 8$b    $b$sreturn$s memo[curNum]
@@ -20,4 +20,5 @@
 12$b    $bmemo[$u1$u] = $u1$u
 13$b    $b$sreturn$s fibHelper(curNum, memo)
 -
+-$d $d
 -$d $d

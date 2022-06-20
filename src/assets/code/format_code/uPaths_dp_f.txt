@@ -3,12 +3,12 @@
 3$b        $b$sreturn$s $u0$u
 4$b    $b$selif$s(r == $u0$u $sor$s c==$u0$u):
 5$b        $b$sreturn$s $u1$u
-6$b    $b$selif$s((r,c) in memo):
+6$b    $b$selif$s((r,c) $sin$s memo):
 7$b        $b$sreturn$s memo[(r,c)]
 -$d $d
-8$b    $bpathsMovingLeft = uniquePathsHelper(r-$u1$u,c)
-9$b    $bpathsMovingDown = uniquePathsHelper(r,c-$u1$u)
-10$b    $btotalPaths = pathsMovingLeft + bpathsMovingDown
+8$b    $bpathsMovingLeft = uniquePathsHelper(r-$u1$u,c,memo)
+9$b    $bpathsMovingDown = uniquePathsHelper(r,c-$u1$u,memo)
+10$b    $btotalPaths = pathsMovingLeft + pathsMovingDown
 11$b    $bmemo[(r,c)] = totalPaths
 -$d $d
 12$b    $b$sreturn$s memo[(r,c)]
@@ -19,4 +19,5 @@
 14$b    $bmemo = {}
 15$b    $b$sreturn$s uniquePathsHelper(r-$u1$u,c-$u1$u,memo)
 -
--$d $d  
+-$d $d
+-$d $d 

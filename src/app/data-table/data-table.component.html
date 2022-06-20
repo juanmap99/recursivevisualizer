@@ -1,7 +1,7 @@
+<!--[style.min-width]="'700px'" -->
 <ul [style.width]="getCodeBoxWidth() + 'px'"
-    [style.min-width]="'700px'"
     class="responsive-table">
-    <li class="table-header">
+    <li class="table-header" [style.font-size]="headerSize+'px'">
       <div class="col col-1 header-cont">
         <span>Counter</span>
         <div class="icon-cont">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col col-2 header-cont">
-        <span [style.margin-left]="'88px'">Tree depth</span>
+        <span>Tree depth</span>
         <div class="icon-cont">
           <div class="icon">
             <fa-icon (click)="sortByTreeDepth(true)" [icon]="iconUp"></fa-icon>
@@ -25,10 +25,10 @@
         </div>
       </div>
       <div class="col col-3 header-cont">
-        <span [style.margin-left]="'31px'">Parameters</span>
+        <span>Parameters</span>
       </div>
       <div class="col col-4 header-cont">
-        <span [style.margin-left]="'50px'">Output</span>
+        <span>Output</span>
         <div class="icon-cont">
           <div class="icon">
             <fa-icon (click)="sortByOutput(true)" [icon]="iconUp"></fa-icon>
@@ -40,7 +40,7 @@
       </div>
     </li>
     <li *ngFor="let el of table.data" 
-        [style.background-color]="el.values.counter == 1 && !isRunning ? '#F5F500' : '#ffffff'"
+        [style.background-color]="el.values.counter == 1 && !isRunning && !isNan(el.values.returnVal)  ? '#F5F500' : '#ffffff'"
         class="table-row">
       <div class="col col-1" 
           data-label="Counter">{{el.values.counter}}</div>

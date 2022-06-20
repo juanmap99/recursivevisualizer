@@ -12,6 +12,8 @@ import { RunControllerService } from './run-controller.service';
 import { CodeBgService } from './code-bg.service';
 import { TableManagerService } from './table-manager.service';
 import { MemoService } from './memo.service';
+import { ManualAlgFactory } from '../model/manual-mode/ManualAlgFactory';
+import { Parameter } from '../model/problem-components/Parameter';
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +62,25 @@ export class ProblemControllerService {
     this.selecProblemObs.next(this.selectedProblem);
   }
 
+  killExecution(){
+    this.selectedProblem.stopRun(); 
+    this.runServ.stopProgram();
+  }
+
   executeProblem(runParams : RunParams){
+    this.tableServ.clearRows()
+    this.memoServ.clearMemo()
     this.selectedProblem.adjustProblemConfig(runParams);
+    if(runParams.runMode == RunMode.MANUAL){
+      if(!this.dpMode){
+        let manualAlg = ManualAlgFactory.getManualAlgNoDP(this.selectedProblem,this.codeBg,this.tableServ,this.memoServ)
+        this.runServ.setAlgorithm(manualAlg)
+      }
+      else{
+        let manualAlg = ManualAlgFactory.getManualAlgDP(this.selectedProblem,this.codeBg,this.tableServ,this.memoServ)
+        this.runServ.setAlgorithm(manualAlg)
+      }
+    }
     this.runServ.runProgram(runParams.runMode, this.selectedProblem);
   }
 
@@ -69,5 +88,9 @@ export class ProblemControllerService {
     this.dpMode = dpMode;
     this.selectedProblem.setDpDesired(this.dpMode);
     this.dpModeObs.next(this.dpMode);
+  }
+
+  paramsAreValid(params: Parameter[]):boolean{
+    return this.selectedProblem.paramsAreValid(params)
   }
 }
